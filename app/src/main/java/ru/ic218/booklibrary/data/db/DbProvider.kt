@@ -5,4 +5,5 @@ package ru.ic218.booklibrary.data.db
  */
 
 interface DbProvider {
+
 }

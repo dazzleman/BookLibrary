@@ -5,4 +5,5 @@ package ru.ic218.booklibrary.data.repository
  */
 
 interface DefaultRepository {
+
 }
