@@ -12,7 +12,7 @@ import ru.ic218.booklibrary.utils.applySchedulers
 class MainPresenter(private val defaultRepository: DefaultRepository)
     : BasePresenter<MainContract.View>(), MainContract.Presenter {
 
-    private var adapter = MainAdapter(defaultRepository)
+    private var adapter = MainAdapter(defaultRepository, onItemClick = {view?.runActivity(it)})
 
     override fun init() {
 
@@ -21,16 +21,6 @@ class MainPresenter(private val defaultRepository: DefaultRepository)
         } else {
             getCategories()
         }
-
-/*        Observable.just(true)
-                .zipWith(Observable.interval(3000, TimeUnit.MILLISECONDS), BiFunction{ t1: Boolean, t2:Long ->
-                    true
-                })
-                .subscribe({
-                    defaultRepository.addBook(BookEntity(
-                            21, 0, "test33", "test2"
-                    ))
-                })*/
     }
 
     private fun createDataAndLoadCategories() {

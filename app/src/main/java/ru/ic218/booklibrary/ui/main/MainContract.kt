@@ -11,6 +11,7 @@ interface MainContract {
 
     interface View : BaseContract.View {
         fun setAdapter(adapter: MainAdapter)
+        fun runActivity(id: Int)
     }
 
     interface Presenter : BaseContract.Presenter<View> {
