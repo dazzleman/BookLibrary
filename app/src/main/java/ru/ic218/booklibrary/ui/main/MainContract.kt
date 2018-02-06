@@ -1,6 +1,7 @@
 package ru.ic218.booklibrary.ui.main
 
 import ru.ic218.booklibrary.ui.common.BaseContract
+import ru.ic218.booklibrary.ui.main.adapter.MainAdapter
 
 /**
  * @author Nikolay Vlaskin on 26.01.2018.
@@ -9,7 +10,7 @@ import ru.ic218.booklibrary.ui.common.BaseContract
 interface MainContract {
 
     interface View : BaseContract.View {
-
+        fun setAdapter(adapter: MainAdapter)
     }
 
     interface Presenter : BaseContract.Presenter<View> {

@@ -8,4 +8,11 @@ import android.content.SharedPreferences
 
 class SharedPreferenceProvider(private val sp: SharedPreferences) : PreferenceProvider {
 
+    companion object {
+        private const val PREF_INSTALLATION_COMPLETED : String = "pref_installation_completed"
+    }
+
+    override var isFirstStartupApplication: Boolean
+        get() = sp.getBoolean(PREF_INSTALLATION_COMPLETED, true)
+        set(value) { sp.edit().putBoolean(PREF_INSTALLATION_COMPLETED, value).apply()  }
 }

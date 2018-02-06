@@ -5,4 +5,6 @@ package ru.ic218.booklibrary.data.preferences
  */
 
 interface PreferenceProvider {
+
+    var isFirstStartupApplication: Boolean
 }

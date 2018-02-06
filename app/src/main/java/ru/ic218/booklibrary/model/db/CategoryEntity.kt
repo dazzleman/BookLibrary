@@ -11,7 +11,7 @@ import android.arch.persistence.room.PrimaryKey
 @Entity(tableName = "category")
 data class CategoryEntity(
 
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     @ColumnInfo(name = "id")
     var id: Int,
 

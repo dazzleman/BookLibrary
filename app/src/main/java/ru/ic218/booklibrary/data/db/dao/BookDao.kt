@@ -11,8 +11,11 @@ import ru.ic218.booklibrary.model.db.BookEntity
 @Dao
 interface BookDao {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertBook(book: BookEntity)
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    fun insertAll(vararg books: BookEntity)
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
     fun updateBook(book: BookEntity)
@@ -20,6 +23,12 @@ interface BookDao {
     @Query("select * from books where id = :id")
     fun findBookById(id: Int): BookEntity
 
+    @Query("select * from books where idCategory = :id")
+    fun getBooksFromCategory(id: Int): Flowable<List<BookEntity>>
+
     @Query("SELECT * FROM books")
     fun getBooks(): Flowable<List<BookEntity>>
+
+    @Query("delete from books")
+    fun clearBooks()
 }

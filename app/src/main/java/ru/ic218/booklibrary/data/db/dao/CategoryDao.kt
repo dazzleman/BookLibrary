@@ -18,6 +18,9 @@ interface CategoryDao {
     @Insert(onConflict = REPLACE)
     fun insertCategory(category: CategoryEntity)
 
+    @Insert(onConflict = REPLACE)
+    fun insertAllCategory(vararg categories: CategoryEntity)
+
     @Update(onConflict = REPLACE)
     fun updateCategory(category: CategoryEntity)
 
@@ -26,4 +29,7 @@ interface CategoryDao {
 
     @Query("SELECT * FROM category")
     fun getCategories(): Flowable<List<CategoryEntity>>
+
+    @Query("delete from category")
+    fun clearCategories()
 }
