@@ -14,4 +14,5 @@ interface DbProvider {
     fun saveBooks(books: ArrayList<BookEntity>)
     fun getBooksFromCategory(idCategory: Int): Flowable<List<BookEntity>>
     fun getCategories(): Flowable<List<CategoryEntity>>
+    fun addBook(book: BookEntity)
 }

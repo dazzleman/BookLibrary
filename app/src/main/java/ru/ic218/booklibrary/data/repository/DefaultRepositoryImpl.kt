@@ -56,4 +56,8 @@ class DefaultRepositoryImpl(
     override fun getCategories(): Flowable<List<CategoryEntity>> {
         return dbProvider.getCategories()
     }
+
+    override fun addBook(book: BookEntity) {
+        dbProvider.addBook(book)
+    }
 }

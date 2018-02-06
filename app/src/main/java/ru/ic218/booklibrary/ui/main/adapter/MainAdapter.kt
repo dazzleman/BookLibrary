@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.disposables.Disposable
 import ru.ic218.booklibrary.R
 import ru.ic218.booklibrary.data.repository.DefaultRepository
 import ru.ic218.booklibrary.model.db.CategoryEntity
@@ -19,6 +21,7 @@ import ru.ic218.booklibrary.utils.applySchedulers
 class MainAdapter(private val defaultRepository: DefaultRepository) : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
 
     private var categories: ArrayList<CategoryEntity> = arrayListOf()
+    private val compose: CompositeDisposable = CompositeDisposable()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_main_recycle_view, parent, false)
@@ -35,6 +38,7 @@ class MainAdapter(private val defaultRepository: DefaultRepository) : RecyclerVi
                 .subscribe({
                     holder.recycleSecond.adapter = SecondAdapter(it)
                 })
+                .addToDisposables()
     }
 
     override fun getItemCount() = categories.size
@@ -43,6 +47,9 @@ class MainAdapter(private val defaultRepository: DefaultRepository) : RecyclerVi
         this.categories.addAll(categories)
         notifyDataSetChanged()
     }
+
+    fun clearDisposable() = compose.clear()
+    private fun Disposable.addToDisposables() = compose.add(this)
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
 

@@ -21,6 +21,16 @@ class MainPresenter(private val defaultRepository: DefaultRepository)
         } else {
             getCategories()
         }
+
+/*        Observable.just(true)
+                .zipWith(Observable.interval(3000, TimeUnit.MILLISECONDS), BiFunction{ t1: Boolean, t2:Long ->
+                    true
+                })
+                .subscribe({
+                    defaultRepository.addBook(BookEntity(
+                            21, 0, "test33", "test2"
+                    ))
+                })*/
     }
 
     private fun createDataAndLoadCategories() {
@@ -45,5 +55,10 @@ class MainPresenter(private val defaultRepository: DefaultRepository)
                     view?.setAdapter(adapter)
                 }, { println("${it.message}") })
                 .addToDisposables()
+    }
+
+    override fun detachView() {
+        adapter.clearDisposable()
+        super.detachView()
     }
 }

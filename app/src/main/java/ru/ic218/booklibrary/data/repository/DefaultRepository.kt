@@ -18,4 +18,6 @@ interface DefaultRepository {
     fun getBooksFromDBByCategory(idCategory: Int): Flowable<List<BookEntity>>
 
     fun getCategories(): Flowable<List<CategoryEntity>>
+
+    fun addBook(book: BookEntity)
 }

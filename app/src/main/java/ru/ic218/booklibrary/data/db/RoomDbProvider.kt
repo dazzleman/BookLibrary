@@ -27,4 +27,8 @@ class RoomDbProvider(private var db: AppDatabase) : DbProvider {
     override fun getCategories(): Flowable<List<CategoryEntity>> {
         return db.categoryDao().getCategories()
     }
+
+    override fun addBook(book: BookEntity) {
+        db.bookDao().insertBook(book)
+    }
 }
