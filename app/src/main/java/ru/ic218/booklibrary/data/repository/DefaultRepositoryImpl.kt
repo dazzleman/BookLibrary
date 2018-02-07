@@ -60,4 +60,12 @@ class DefaultRepositoryImpl(
     override fun addBook(book: BookEntity) {
         dbProvider.addBook(book)
     }
+
+    override fun getBookById(idBook: Int): Single<BookEntity> {
+        return dbProvider.getBookById(idBook)
+    }
+
+    override fun updateBook(book: BookEntity) {
+        dbProvider.updateBook(book)
+    }
 }

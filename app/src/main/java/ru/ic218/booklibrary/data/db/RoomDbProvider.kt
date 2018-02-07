@@ -1,6 +1,7 @@
 package ru.ic218.booklibrary.data.db
 
 import io.reactivex.Flowable
+import io.reactivex.Single
 import ru.ic218.booklibrary.model.db.BookEntity
 import ru.ic218.booklibrary.model.db.CategoryEntity
 
@@ -30,5 +31,13 @@ class RoomDbProvider(private var db: AppDatabase) : DbProvider {
 
     override fun addBook(book: BookEntity) {
         db.bookDao().insertBook(book)
+    }
+
+    override fun getBookById(idBook: Int): Single<BookEntity> {
+        return db.bookDao().getBookById(idBook)
+    }
+
+    override fun updateBook(book: BookEntity) {
+        db.bookDao().updateBook(book)
     }
 }

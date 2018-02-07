@@ -2,6 +2,7 @@ package ru.ic218.booklibrary.data.db.dao
 
 import android.arch.persistence.room.*
 import io.reactivex.Flowable
+import io.reactivex.Single
 import ru.ic218.booklibrary.model.db.BookEntity
 
 /**
@@ -31,4 +32,8 @@ interface BookDao {
 
     @Query("delete from books")
     fun clearBooks()
+
+    @Query("SELECT * FROM books where id = :id")
+    fun getBookById(id: Int): Single<BookEntity>
+
 }

@@ -6,7 +6,9 @@ import kotlinx.android.synthetic.main.activity_details.*
 import ru.ic218.booklibrary.AppDelegate
 import ru.ic218.booklibrary.R
 import ru.ic218.booklibrary.data.repository.DefaultRepository
+import ru.ic218.booklibrary.model.db.BookEntity
 import ru.ic218.booklibrary.ui.common.BaseActivity
+import ru.ic218.booklibrary.ui.common.dialog.BookDialogFragment
 import ru.ic218.booklibrary.ui.details.adapter.DetailsAdapter
 import javax.inject.Inject
 
@@ -28,6 +30,7 @@ class DetailsActivity : BaseActivity(), DetailsContract.View {
         presenter.attachView(this)
 
         initRecycleView()
+        btnCreateBook.setOnClickListener({presenter.createBook()})
         presenter.init(intent.getIntExtra(CATEGORY_ID, 0))
     }
 
@@ -38,6 +41,14 @@ class DetailsActivity : BaseActivity(), DetailsContract.View {
 
     override fun setAdapter(adapter: DetailsAdapter) {
         rvDetails.adapter = adapter
+    }
+
+    override fun showDialogAddBook(idBook: Int, idCategory: Int) {
+        BookDialogFragment.newInstance(idBook, idCategory, true).show(supportFragmentManager, "BookDialogAdd")
+    }
+
+    override fun showDialogEditBook(book: BookEntity) {
+        BookDialogFragment.newInstance(book.id, book.idCategory, false).show(supportFragmentManager, "BookDialogEdit")
     }
 
     override fun onDestroy() {
